@@ -7,5 +7,4 @@ public interface InstructorService {
 
 	void deleteInstructor(String id);
 
-	
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dkitaw.backend.service.InstructorDetailService;
 import com.dkitaw.backend.service.InstructorService;
 import com.dkitaw.backend.shared.dto.InstructorDTO;
 import com.dkitaw.backend.ui.model.request.InstructorDetailRequestModel;
@@ -20,9 +21,11 @@ import com.dkitaw.backend.ui.model.response.RequestOperationStatus;
 @RequestMapping("instructor")
 public class InstructorController {
 	InstructorService instructorService;
+	InstructorDetailService instructorDetailService;
 	
-	public InstructorController(InstructorService instructorService) {
+	public InstructorController(InstructorService instructorService, InstructorDetailService instructorDetailService) {
 		this.instructorService = instructorService;
+		this.instructorDetailService = instructorDetailService;
 	}
 
 	@PostMapping(path = "/create")
@@ -37,17 +40,32 @@ public class InstructorController {
 	    returnValue = modelMapper.map(createInstructor, InstructorRest.class);
 	    return returnValue;
 	  }
-	
-	@DeleteMapping(path = "/{id}")
-	  public OperationStatusModel deleteUser(@PathVariable String id) {
+//	Delete Instructor by instructorId
+	@DeleteMapping(path = "/{instructorId}")
+	  public OperationStatusModel deleteInstructor(@PathVariable String instructorId) {
 
 	    OperationStatusModel returnValue = new OperationStatusModel();
 	    returnValue.setOperationName(RequestOperationName.DELETE.name());
 
-	    // Delete user
-	    instructorService.deleteInstructor(id);
+	    // Delete Instructor
+	    instructorService.deleteInstructor(instructorId);
 	    returnValue.setOperationResult(RequestOperationStatus.SUCCESS.name());
 	    
 	    return returnValue;
 	  }
+	
+//	Delete Instructor detail by instructorDetailId
+	@DeleteMapping(path = "/detail/{instructorDetailId}")
+	  public OperationStatusModel deleteinstructorDetailId(@PathVariable String instructorDetailId) {
+
+	    OperationStatusModel returnValue = new OperationStatusModel();
+	    returnValue.setOperationName(RequestOperationName.DELETE.name());
+
+	    // Delete Instructor
+	    instructorDetailService.deleteInstructorDetail(instructorDetailId);
+	    returnValue.setOperationResult(RequestOperationStatus.SUCCESS.name());
+	    
+	    return returnValue;
+	  }
+	
 }

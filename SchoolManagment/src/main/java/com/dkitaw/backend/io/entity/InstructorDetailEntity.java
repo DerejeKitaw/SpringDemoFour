@@ -17,6 +17,8 @@ public class InstructorDetailEntity {
 	@Column(name="id")
 	private int id;
 	
+	private String instructorDetailId;
+	
 	@Column(name="youtube_channel")
 	private String youtubeChannel;
 	
@@ -28,8 +30,10 @@ public class InstructorDetailEntity {
 	// add @OneToOne annotation
 	
 	@OneToOne(mappedBy="instructorDetailEntity", 
-			cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-						CascadeType.REFRESH})
+			cascade={CascadeType.DETACH, 
+					 CascadeType.MERGE, 
+					 CascadeType.PERSIST,
+					 CascadeType.REFRESH})
 	private InstructorEntity instructorEntity;
 
 	
@@ -56,6 +60,14 @@ public class InstructorDetailEntity {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getInstructorDetailId() {
+		return instructorDetailId;
+	}
+
+	public void setInstructorDetailId(String instructorDetailId) {
+		this.instructorDetailId = instructorDetailId;
 	}
 
 	public String getYoutubeChannel() {

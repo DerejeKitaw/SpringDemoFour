@@ -31,8 +31,8 @@ public class InstructorServiceImpl implements InstructorService {
 	}
 
 	@Override
-	public void deleteInstructor(String categoryId) {
-		InstructorEntity instructorEntity = instructorRepository.findByInstructorId(categoryId);
+	public void deleteInstructor(String instructorId) {
+		InstructorEntity instructorEntity = instructorRepository.findByInstructorId(instructorId);
 		if (instructorEntity == null) {
 			try {
 				throw new Exception("Not found");
@@ -41,7 +41,10 @@ public class InstructorServiceImpl implements InstructorService {
 				e.printStackTrace();
 			}
 		}
+		
 		instructorRepository.delete(instructorEntity);
 	}
+
+	
 
 }
