@@ -7,6 +7,7 @@ import com.dkitaw.backend.io.entity.InstructorDetailEntity;
 public class InstructorDTO implements Serializable {
 	private static final long serialVersionUID = 382871879533969397L;
 	private int id;
+	private String instructorId;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -17,6 +18,12 @@ public class InstructorDTO implements Serializable {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getInstructorId() {
+		return instructorId;
+	}
+	public void setInstructorId(String instructorId) {
+		this.instructorId = instructorId;
 	}
 	public String getFirstName() {
 		return firstName;

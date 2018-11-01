@@ -1,6 +1,8 @@
 package com.dkitaw.backend.ui.controller;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,9 @@ import com.dkitaw.backend.service.InstructorService;
 import com.dkitaw.backend.shared.dto.InstructorDTO;
 import com.dkitaw.backend.ui.model.request.InstructorDetailRequestModel;
 import com.dkitaw.backend.ui.model.response.InstructorRest;
+import com.dkitaw.backend.ui.model.response.OperationStatusModel;
+import com.dkitaw.backend.ui.model.response.RequestOperationName;
+import com.dkitaw.backend.ui.model.response.RequestOperationStatus;
 
 @RestController
 @RequestMapping("instructor")
@@ -30,6 +35,19 @@ public class InstructorController {
 
 	    InstructorDTO createInstructor = instructorService.createInstructor(instructorDTO);
 	    returnValue = modelMapper.map(createInstructor, InstructorRest.class);
+	    return returnValue;
+	  }
+	
+	@DeleteMapping(path = "/{id}")
+	  public OperationStatusModel deleteUser(@PathVariable String id) {
+
+	    OperationStatusModel returnValue = new OperationStatusModel();
+	    returnValue.setOperationName(RequestOperationName.DELETE.name());
+
+	    // Delete user
+	    instructorService.deleteInstructor(id);
+	    returnValue.setOperationResult(RequestOperationStatus.SUCCESS.name());
+	    
 	    return returnValue;
 	  }
 }

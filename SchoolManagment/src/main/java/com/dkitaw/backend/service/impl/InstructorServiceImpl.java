@@ -23,10 +23,25 @@ public class InstructorServiceImpl implements InstructorService {
 		ModelMapper modelMapper = new ModelMapper();
 		InstructorEntity instructorEntity = modelMapper.map(instructor, InstructorEntity.class);
 		
+//		instructorEntity.setInstructorId(instructor.getInstructorId());
 		
 		InstructorEntity storedInstructorDetail = instructorRepository.save(instructorEntity);
 		InstructorDTO returnValue = modelMapper.map(storedInstructorDetail, InstructorDTO.class);
 	    return returnValue;
+	}
+
+	@Override
+	public void deleteInstructor(String categoryId) {
+		InstructorEntity instructorEntity = instructorRepository.findByInstructorId(categoryId);
+		if (instructorEntity == null) {
+			try {
+				throw new Exception("Not found");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		instructorRepository.delete(instructorEntity);
 	}
 
 }

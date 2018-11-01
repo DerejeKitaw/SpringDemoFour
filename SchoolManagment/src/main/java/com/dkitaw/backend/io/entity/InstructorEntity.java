@@ -18,6 +18,9 @@ public class InstructorEntity {
 	@Column(name="id")
 	private int id;
 	
+	@Column(name="instructor_id")
+	private String instructorId;
+	
 	@Column(name="first_name")
 	private String firstName;
 	
@@ -85,6 +88,20 @@ public class InstructorEntity {
 	public String toString() {
 		return "Instructor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", instructorDetail=" + instructorDetailEntity + "]";
+	}
+
+
+
+	public void setInstructorDetailEntity(InstructorDetailEntity instructorDetailEntity) {
+		this.instructorDetailEntity = instructorDetailEntity;
+	}
+
+	public String getInstructorId() {
+		return instructorId;
+	}
+
+	public void setInstructorId(String instructorId) {
+		this.instructorId = instructorId;
 	}
 	
 	

@@ -8,4 +8,7 @@ import com.dkitaw.backend.io.entity.InstructorEntity;
 @Repository
 public interface InstructorRepository extends PagingAndSortingRepository<InstructorEntity, Integer>{
 
+
+	InstructorEntity findByInstructorId(String instructorId);
+
 }
